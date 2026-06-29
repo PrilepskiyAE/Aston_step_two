@@ -26,4 +26,34 @@ public class MyHashMapTest {
 
     }
 
+    @Test
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Успешное удаление существующего ключа")
+    @Description("Проверяем, что метод remove корректно удаляет пару ключ-значение, возвращает удалённое значение и уменьшает размер коллекции.")
+    @Story("Удаление элементов")
+    @Owner("Prilepskiy AE")
+    void remove_existingKey() {
+        MyHashMap<String, Integer> map = new MyHashMap<>();
+        map.put("key1", 100);
+        map.put("key2", 200);
+
+        Integer removed = map.remove("key1");
+        assertThat(removed).isEqualTo(100);
+        assertThat(map.get("key1")).isNull();
+        assertThat(map.size()).isEqualTo(1);
+    }
+
+    @Test
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Удаление несуществующего ключа")
+    @Description("Проверяем, что при удалении отсутствующего ключа метод возвращает null и размер мапы не изменяется.")
+    @Story("Удаление элементов")
+    @Owner("Prilepskiy AE")
+    void remove_nonExistingKey() {
+        MyHashMap<String, Integer> map = new MyHashMap<>();
+        Integer removed = map.remove("missing");
+        assertThat(removed).isNull();
+        assertThat(map.size()).isEqualTo(0);
+    }
+
 }

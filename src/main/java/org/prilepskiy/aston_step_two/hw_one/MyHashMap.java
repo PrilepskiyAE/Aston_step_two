@@ -1,5 +1,7 @@
 package org.prilepskiy.aston_step_two.hw_one;
 
+import java.util.Objects;
+
 public class MyHashMap<K, V> implements BaseMyHashMap <K,V>{
     private Node<K, V>[] table;
     private int size;
@@ -37,6 +39,27 @@ public class MyHashMap<K, V> implements BaseMyHashMap <K,V>{
 
     @Override
     public V remove(K key) {
+        int hash = hash(key);
+        int index = indexFor(hash, table.length);
+        Node<K, V> head = table[index];
+
+        Node<K, V> prev = null;
+        Node<K, V> current = head;
+
+        while (current != null) {
+            if (current.hash == hash &&
+                    (Objects.equals(key, current.key))) {
+                if (prev == null) {
+                    table[index] = current.next;
+                } else {
+                    prev.next = current.next;
+                }
+                size--;
+                return current.value;
+            }
+            prev = current;
+            current = current.next;
+        }
         return null;
     }
 
@@ -102,4 +125,7 @@ public class MyHashMap<K, V> implements BaseMyHashMap <K,V>{
         return null;
     }
 
+    private int hash(K key) {
+        return (key == null) ? 0 : key.hashCode();
+    }
 }
