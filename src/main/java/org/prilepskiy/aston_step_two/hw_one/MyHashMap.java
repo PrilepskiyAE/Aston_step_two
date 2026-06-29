@@ -70,7 +70,7 @@ public class MyHashMap<K, V> implements BaseMyHashMap <K,V>{
 
     @Override
     public boolean containsKey(K key) {
-        return false;
+        return findNode(key) != null;
     }
 
 

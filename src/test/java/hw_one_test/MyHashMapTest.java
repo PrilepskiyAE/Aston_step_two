@@ -56,4 +56,19 @@ public class MyHashMapTest {
         assertThat(map.size()).isEqualTo(0);
     }
 
+    @Test
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Проверка containsKey для существующего и несуществующего ключа")
+    @Description("Проверяем, что метод containsKey возвращает true для существующего ключа и false для отсутствующего.")
+    @Story("Проверка наличия ключа")
+    @Owner("Prilepskiy AE")
+    void containsKey_trueAndFalse() {
+        MyHashMap<String, String> map = new MyHashMap<>();
+        map.put("a", "A");
+
+        assertThat(map.containsKey("a")).isTrue();
+        assertThat(map.containsKey("b")).isFalse();
+    }
+
+
 }
