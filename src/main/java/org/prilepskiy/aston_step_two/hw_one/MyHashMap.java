@@ -9,6 +9,7 @@ public class MyHashMap<K, V> implements BaseMyHashMap <K,V>{
     private static final float LOAD_FACTOR = 0.75f;
     private int threshold;
 
+    @SuppressWarnings("unchecked")
     public MyHashMap(){
         table = new Node[DEFAULT_SIZE];
         threshold = (int) (DEFAULT_SIZE * LOAD_FACTOR);
